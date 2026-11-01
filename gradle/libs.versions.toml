@@ -1,7 +1,7 @@
 [versions]
 spring-boot = "3.4.1"
 spring-dependency-management = "1.1.7"
-resilience4j = "2.2.0"
+resilience4j = "2.4.0"
 gtfs-realtime-bindings = "0.0.4"
 protobuf = "3.25.5"
 
