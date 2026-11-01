@@ -10,10 +10,6 @@ by interpolating along the real track geometry between the stop it left and the 
 at — which is where most of the engineering in this repo lives (see
 [ADR 1](docs/adr/0001-position-estimation-without-gps.md)).
 
-![Screenshot placeholder — replace with a GIF of the live map](docs/screenshot.png)
-
-> _Screenshot placeholder: record a short GIF of the running map (`docker compose up`, then the
-> map at zoom 12 over Manhattan with the delay colouring on) and save it as `docs/screenshot.png`._
 
 ---
 
