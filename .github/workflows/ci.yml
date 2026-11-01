@@ -36,7 +36,7 @@ jobs:
       # though they are skipped in environments without a Docker daemon.
       - name: Integration tests (PostGIS + Redis via Testcontainers)
         run: ./gradlew --no-daemon integrationTest
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: backend-test-reports
@@ -63,7 +63,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Playwright smoke test (mocked API)
         run: npm run e2e -- --project=desktop
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
@@ -97,7 +97,7 @@ jobs:
           npm ci || npm install
           npx playwright install --with-deps chromium
           E2E_LIVE=1 npm run e2e -- --project=desktop
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: backend-log
