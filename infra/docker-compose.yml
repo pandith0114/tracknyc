@@ -1,0 +1,89 @@
+# TrackNYC local stack. `docker compose up --build` then open http://localhost:8088
+# Defaults to REPLAY mode: the recorded (synthetic) fixtures loop at real-time speed, so the
+# map is alive without any API keys. Set TRACKNYC_MODE=live in .env to poll the real MTA feeds.
+name: tracknyc
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: tracknyc
+      POSTGRES_USER: tracknyc
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-tracknyc}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tracknyc -d tracknyc"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+
+  service:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.service
+    environment:
+      TRACKNYC_MODE: ${TRACKNYC_MODE:-replay}
+      MTA_API_KEY: ${MTA_API_KEY:-}
+      DATABASE_URL: jdbc:postgresql://postgres:5432/tracknyc
+      DATABASE_USER: tracknyc
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-tracknyc}
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "${SERVICE_PORT:-8080}:8080"
+
+  web:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.web
+      args:
+        VITE_MAP_STYLE_URL: ${VITE_MAP_STYLE_URL:-https://tiles.openfreemap.org/styles/dark}
+    depends_on:
+      service:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-8088}:80"
+
+  # Optional: `docker compose --profile monitoring up` adds Prometheus + Grafana.
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    profiles: ["monitoring"]
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:11.3.1
+    profiles: ["monitoring"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:

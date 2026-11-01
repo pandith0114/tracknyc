@@ -1,0 +1,90 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "web: dev server",
+      "type": "shell",
+      "command": "npm run dev -- --strictPort",
+      "options": { "cwd": "${workspaceFolder}/web" },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "pattern": { "regexp": "^$" },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*VITE.*",
+          "endsPattern": ".*Local:.*5173.*"
+        }
+      },
+      "presentation": { "panel": "dedicated", "group": "tracknyc" }
+    },
+    {
+      "label": "web: install dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "options": { "cwd": "${workspaceFolder}/web" },
+      "problemMatcher": []
+    },
+    {
+      "label": "web: unit tests",
+      "type": "shell",
+      "command": "npm test -- --run",
+      "options": { "cwd": "${workspaceFolder}/web" },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "web: typecheck",
+      "type": "shell",
+      "command": "npm run typecheck",
+      "options": { "cwd": "${workspaceFolder}/web" },
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "backend: build + unit tests",
+      "type": "shell",
+      "command": "./gradlew build",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gradle"]
+    },
+    {
+      "label": "backend: integration tests (needs Docker)",
+      "type": "shell",
+      "command": "./gradlew integrationTest",
+      "group": "test",
+      "problemMatcher": ["$gradle"]
+    },
+    {
+      "label": "infra: start postgres + redis",
+      "type": "shell",
+      "command": "docker compose -f infra/docker-compose.yml up -d --wait postgres redis",
+      "problemMatcher": [],
+      "presentation": { "reveal": "silent" }
+    },
+    {
+      "label": "infra: whole stack (docker compose up)",
+      "type": "shell",
+      "command": "docker compose -f infra/docker-compose.yml up --build",
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated" }
+    },
+    {
+      "label": "infra: stop everything",
+      "type": "shell",
+      "command": "docker compose -f infra/docker-compose.yml down",
+      "problemMatcher": []
+    },
+    {
+      "label": "fixtures: regenerate",
+      "type": "shell",
+      "command": "python3 scripts/fixtures/gen_static.py && python3 scripts/fixtures/gen_realtime.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "load test: k6 push layer",
+      "type": "shell",
+      "command": "k6 run infra/k6/push-load.js",
+      "problemMatcher": []
+    }
+  ]
+}

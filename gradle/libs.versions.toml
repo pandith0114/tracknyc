@@ -1,0 +1,17 @@
+[versions]
+spring-boot = "3.4.1"
+spring-dependency-management = "1.1.7"
+resilience4j = "2.2.0"
+gtfs-realtime-bindings = "0.0.4"
+protobuf = "3.25.5"
+
+[libraries]
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+resilience4j-circuitbreaker = { module = "io.github.resilience4j:resilience4j-circuitbreaker", version.ref = "resilience4j" }
+resilience4j-retry = { module = "io.github.resilience4j:resilience4j-retry", version.ref = "resilience4j" }
+resilience4j-micrometer = { module = "io.github.resilience4j:resilience4j-micrometer", version.ref = "resilience4j" }
+gtfs-realtime-bindings = { module = "com.google.transit:gtfs-realtime-bindings", version.ref = "gtfs-realtime-bindings" }
+protobuf-java = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

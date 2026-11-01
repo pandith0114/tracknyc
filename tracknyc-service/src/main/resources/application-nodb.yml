@@ -1,0 +1,24 @@
+# Run without PostgreSQL or Redis: static GTFS is read straight from files and live state is
+# kept in memory. Used by tests, the Playwright job and quick local hacking:
+#   SPRING_PROFILES_ACTIVE=nodb ./gradlew :tracknyc-service:bootRun
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+      - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+management:
+  health:
+    redis:
+      enabled: false
+    db:
+      enabled: false
+
+tracknyc:
+  static-data:
+    source: file
+  state:
+    store: memory

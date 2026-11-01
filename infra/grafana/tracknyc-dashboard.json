@@ -1,0 +1,156 @@
+{
+  "title": "TrackNYC — feeds, positions and push",
+  "uid": "tracknyc-main",
+  "tags": ["tracknyc", "transit"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "time": { "from": "now-1h", "to": "now" },
+  "templating": {
+    "list": [
+      {
+        "name": "datasource",
+        "type": "datasource",
+        "query": "prometheus",
+        "current": { "text": "Prometheus", "value": "Prometheus" }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Active trains",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 0 },
+      "fieldConfig": {
+        "defaults": { "unit": "short", "color": { "mode": "thresholds" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 1 } ] } },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "value", "graphMode": "area" },
+      "targets": [
+        { "refId": "A", "expr": "sum(tracknyc_active_trains)", "legendFormat": "all" },
+        { "refId": "B", "expr": "tracknyc_active_trains", "legendFormat": "{{system}}" }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Connected clients",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 0 },
+      "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "graphMode": "area" },
+      "targets": [{ "refId": "A", "expr": "sum(push_connected_clients)", "legendFormat": "clients" }]
+    },
+    {
+      "id": 3,
+      "type": "state-timeline",
+      "title": "Feed status (0 up · 1 degraded · 2 stale · 3 down · 4 disabled)",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 5, "w": 12, "x": 12, "y": 0 },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "up", "color": "green" }, "1": { "text": "degraded", "color": "yellow" },
+              "2": { "text": "stale", "color": "orange" }, "3": { "text": "down", "color": "red" },
+              "4": { "text": "disabled", "color": "text" } } }
+          ]
+        },
+        "overrides": []
+      },
+      "options": { "showValue": "never", "mergeValues": true },
+      "targets": [{ "refId": "A", "expr": "feed_status", "legendFormat": "{{feed}}" }]
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Feed data age (seconds since the newest data)",
+      "description": "Crossing 60 s turns on the UI's stale-data banner.",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 5 },
+      "fieldConfig": {
+        "defaults": { "unit": "s", "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 5 },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "orange", "value": 60 }, { "color": "red", "value": 120 } ] } },
+        "overrides": []
+      },
+      "targets": [{ "refId": "A", "expr": "feed_data_age_seconds", "legendFormat": "{{feed}}" }]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Feed fetch latency (p50 / p95 per feed)",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 5 },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "histogram_quantile(0.5, sum(rate(feed_fetch_latency_seconds_bucket[5m])) by (le, feed))", "legendFormat": "p50 {{feed}}" },
+        { "refId": "B", "expr": "histogram_quantile(0.95, sum(rate(feed_fetch_latency_seconds_bucket[5m])) by (le, feed))", "legendFormat": "p95 {{feed}}" }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Fetch and decode errors (per second)",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 7, "w": 8, "x": 0, "y": 12 },
+      "fieldConfig": { "defaults": { "unit": "reqps" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "rate(feed_fetch_errors_total[5m])", "legendFormat": "fetch {{feed}}" },
+        { "refId": "B", "expr": "rate(feed_decode_errors_total[5m])", "legendFormat": "decode {{feed}}" }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "Push lag (producer → client)",
+      "description": "Time from computing a position to writing the diff to clients.",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 7, "w": 8, "x": 8, "y": 12 },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "histogram_quantile(0.5, sum(rate(push_lag_seconds_bucket[5m])) by (le, stream))", "legendFormat": "p50 {{stream}}" },
+        { "refId": "B", "expr": "histogram_quantile(0.95, sum(rate(push_lag_seconds_bucket[5m])) by (le, stream))", "legendFormat": "p95 {{stream}}" },
+        { "refId": "C", "expr": "histogram_quantile(0.99, sum(rate(push_lag_seconds_bucket[5m])) by (le, stream))", "legendFormat": "p99 {{stream}}" }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "Push bandwidth and dropped clients",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 7, "w": 8, "x": 16, "y": 12 },
+      "fieldConfig": { "defaults": { "unit": "Bps" }, "overrides": [
+        { "matcher": { "id": "byRegexp", "options": "dropped.*" }, "properties": [ { "id": "unit", "value": "short" } ] }
+      ] },
+      "targets": [
+        { "refId": "A", "expr": "rate(push_bytes_total[5m])", "legendFormat": "bytes/s {{stream}}" },
+        { "refId": "B", "expr": "rate(push_dropped_clients_total[5m])", "legendFormat": "dropped {{reason}}" }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "state-timeline",
+      "title": "Circuit breakers",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 5, "w": 12, "x": 0, "y": 19 },
+      "options": { "showValue": "never", "mergeValues": true },
+      "fieldConfig": { "defaults": {}, "overrides": [] },
+      "targets": [{ "refId": "A", "expr": "resilience4j_circuitbreaker_state{state=\"open\"}", "legendFormat": "{{name}} open" }]
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "JVM heap and position-tick health",
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 5, "w": 12, "x": 12, "y": 19 },
+      "fieldConfig": { "defaults": { "unit": "bytes" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "sum(jvm_memory_used_bytes{area=\"heap\"})", "legendFormat": "heap used" },
+        { "refId": "B", "expr": "sum(jvm_memory_max_bytes{area=\"heap\"})", "legendFormat": "heap max" }
+      ]
+    }
+  ]
+}

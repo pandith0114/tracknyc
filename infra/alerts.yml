@@ -1,0 +1,28 @@
+# Mount next to prometheus.yml to enable. Thresholds match the UI's stale rules.
+groups:
+  - name: tracknyc-feeds
+    rules:
+      - alert: FeedStale
+        expr: feed_data_age_seconds > 120
+        for: 2m
+        labels: { severity: warning }
+        annotations:
+          summary: "{{ $labels.feed }} has not produced fresh data for 2 minutes"
+      - alert: FeedDown
+        expr: feed_status >= 3
+        for: 5m
+        labels: { severity: critical }
+        annotations:
+          summary: "{{ $labels.feed }} is down (circuit open or never succeeded)"
+      - alert: NoActiveTrains
+        expr: sum(tracknyc_active_trains) == 0
+        for: 10m
+        labels: { severity: critical }
+        annotations:
+          summary: "No trains on the map for 10 minutes"
+      - alert: PushLagHigh
+        expr: histogram_quantile(0.95, sum(rate(push_lag_seconds_bucket[5m])) by (le, stream)) > 8
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "p95 push lag above 8 s on stream {{ $labels.stream }}"

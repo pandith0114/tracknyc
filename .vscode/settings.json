@@ -1,0 +1,48 @@
+{
+  // --- Java -----------------------------------------------------------------
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.test.defaultConfig": "unit",
+  "java.test.config": [
+    {
+      // Tests read the synthetic fixtures relative to the repository root.
+      "name": "unit",
+      "workingDirectory": "${workspaceFolder}",
+      "vmArgs": ["-Dtracknyc.fixtures-dir=${workspaceFolder}/fixtures"]
+    }
+  ],
+
+  // --- Spring Boot ----------------------------------------------------------
+  "boot-java.rewrite.reconcile": false,
+  "spring-boot.ls.problem.application-properties.unknown-property": "WARNING",
+
+  // --- Web ------------------------------------------------------------------
+  "typescript.tsdk": "web/node_modules/typescript/lib",
+  "eslint.workingDirectories": ["web"],
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+  // --- Noise reduction ------------------------------------------------------
+  "files.exclude": {
+    "**/build": true,
+    "**/.gradle": true,
+    "**/node_modules": true,
+    "web/dist": true,
+    "web/playwright-report": true,
+    "web/test-results": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/node_modules": true,
+    "fixtures/realtime/**": true,
+    "fixtures/gtfs/**/stop_times.txt": true
+  },
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/.gradle/**": true,
+    "**/node_modules/**": true,
+    "fixtures/realtime/**": true
+  },
+  "files.associations": { "*.pb": "binary" }
+}

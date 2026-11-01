@@ -1,0 +1,2 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang
+LI,MTA Long Island Rail Road (SYNTHETIC FIXTURE),https://www.mta.info/lirr,America/New_York,en

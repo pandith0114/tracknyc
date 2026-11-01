@@ -1,0 +1,19 @@
+// MTA railroad (LIRR / Metro-North) stop-time extension, re-typed for this project from our
+// reading of the MTA railroad GTFS-realtime documentation. ASSUMPTION: field number 1005 and
+// the two string fields below. Verify against the current MTA documentation; TrackNYC only
+// uses `track` for display and ignores the extension if it is absent or different.
+
+syntax = "proto2";
+
+import "gtfs-realtime.proto";
+
+package transit_realtime;
+
+message MtaRailroadStopTimeUpdate {
+  optional string track = 1;
+  optional string trainStatus = 2;
+}
+
+extend transit_realtime.TripUpdate.StopTimeUpdate {
+  optional MtaRailroadStopTimeUpdate mta_railroad_stop_time_update = 1005;
+}

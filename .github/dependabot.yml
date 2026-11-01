@@ -1,0 +1,37 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      spring:
+        patterns: ["org.springframework*", "io.micrometer*"]
+      testing:
+        patterns: ["org.testcontainers*", "org.junit*"]
+
+  - package-ecosystem: npm
+    directory: /web
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      deckgl:
+        patterns: ["@deck.gl/*", "maplibre-gl"]
+      react:
+        patterns: ["react", "react-dom", "@types/react*"]
+      tooling:
+        patterns: ["vite", "typescript", "@vitejs/*", "vitest", "@playwright/*"]
+
+  - package-ecosystem: docker
+    directories: ["/infra"]
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

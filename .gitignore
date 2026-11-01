@@ -1,0 +1,25 @@
+# Build output
+build/
+dist/
+out/
+.gradle/
+target/
+*.class
+
+# Node
+node_modules/
+web/dist/
+web/playwright-report/
+web/test-results/
+web/.vite/
+
+# Local config & secrets — never commit real keys
+.env
+.env.local
+*.local
+
+# IDE / OS
+.idea/
+*.iml
+# .vscode/ is committed on purpose: shared run/debug config
+.DS_Store

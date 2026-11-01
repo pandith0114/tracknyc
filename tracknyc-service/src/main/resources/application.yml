@@ -1,0 +1,154 @@
+# TrackNYC service configuration. Every value can be overridden with an environment variable
+# (Spring relaxed binding: tracknyc.mode -> TRACKNYC_MODE). Secrets only via environment.
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  compression:
+    enabled: true
+    mime-types: application/json,application/geo+json,text/plain
+
+spring:
+  application:
+    name: tracknyc-service
+  threads:
+    virtual:
+      enabled: true          # one cheap virtual thread per SSE client
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/tracknyc}
+    username: ${DATABASE_USER:tracknyc}
+    password: ${DATABASE_PASSWORD:tracknyc}
+    hikari:
+      maximum-pool-size: 5
+  flyway:
+    enabled: true
+  data:
+    redis:
+      url: ${REDIS_URL:redis://localhost:6379}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: tracknyc
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+logging:
+  level:
+    nyc.tracknyc: INFO
+    nyc.live: INFO
+
+tracknyc:
+  mode: ${TRACKNYC_MODE:replay}              # replay | live
+  fixtures-dir: ${TRACKNYC_FIXTURES_DIR:fixtures}
+  position-mode: interpolate                 # next-stop | interpolate
+  motion-profile: linear                     # linear | trapezoidal
+  tick-interval: 5s
+  stale-after: 60s
+  mta-api-key: ${MTA_API_KEY:}               # optional; sent as x-api-key only if set
+  static-data:
+    source: postgis                          # postgis | file
+    refresh-cron: "0 30 3 * * *"
+  state:
+    store: redis                             # redis | memory
+    key-prefix: tracknyc
+    ttl: 5m
+    roles: ${TRACKNYC_ROLES:ingest,push}
+  push:
+    flush-interval: 5s
+    heartbeat-interval: 15s
+    emitter-timeout: 30m
+    max-clients: 5000
+  stale:
+    fade-after: 90s      # a train's own data older than this is drawn faded
+    remove-after: 300s   # ...and dropped entirely after this
+    missing-grace: 60s   # a trip that vanished from a healthy feed is held this long
+  rate-limit:
+    enabled: true
+    requests-per-second: 20
+    burst: 40
+  systems:
+    subway:
+      display-name: Subway
+      static-path: gtfs/subway
+      static-url: https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip
+      trip-matching: nyct
+      attribution: "Data: MTA (not an official MTA product)"
+    lirr:
+      display-name: LIRR
+      static-path: gtfs/lirr
+      static-url: https://rrgtfsfeeds.s3.amazonaws.com/gtfslirr.zip
+      trip-matching: exact
+      attribution: "Data: MTA Long Island Rail Road (not an official MTA product)"
+  feeds:
+    # MTA NYCT subway feeds are split by line group. Endpoint names per the MTA developer
+    # portal (https://api.mta.info); verify there before going live.
+    - id: subway-1234567
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs
+      replay-dir: realtime/subway-1234567
+      poll-interval: 15s
+    - id: subway-l
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-l
+      replay-dir: realtime/subway-l
+      poll-interval: 15s
+    - id: subway-ace
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-ace
+      replay-dir: ""
+      poll-interval: 15s
+    - id: subway-bdfm
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm
+      replay-dir: ""
+      poll-interval: 15s
+    - id: subway-g
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-g
+      replay-dir: ""
+      poll-interval: 15s
+    - id: subway-jz
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-jz
+      replay-dir: ""
+      poll-interval: 15s
+    - id: subway-nqrw
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-nqrw
+      replay-dir: ""
+      poll-interval: 15s
+    - id: subway-si
+      system: subway
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-si
+      replay-dir: ""
+      poll-interval: 15s
+    - id: lirr
+      system: lirr
+      url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/lirr%2Fgtfs-lirr
+      replay-dir: realtime/lirr
+      poll-interval: 30s
+    # PATH: community GTFS-realtime feed built from Port Authority data. Off by default; it is
+    # a third-party service, so enable it deliberately. No replay recording ships for it, so in
+    # replay mode it shows as DISABLED, which also demonstrates the per-feed health UI.
+    # Enabling it also needs a `tracknyc.systems.path` entry pointing at the PATH static GTFS,
+    # otherwise its trips have no network to be placed on. See the README.
+    - id: path
+      system: path
+      url: ${PATH_GTFS_RT_URL:https://path.transitdata.nyc/gtfsrt}
+      replay-dir: ""
+      poll-interval: 30s
+      enabled: ${PATH_FEED_ENABLED:false}

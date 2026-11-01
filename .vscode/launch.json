@@ -1,0 +1,116 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // The one to press F5 on. No database, no Redis, no Docker, no API keys:
+      // static GTFS is read from fixtures/, state is kept in memory, and the recorded
+      // feeds loop at real-time speed. http://localhost:8080
+      "type": "java",
+      "name": "Backend: replay, no database (nodb)",
+      "request": "launch",
+      "mainClass": "nyc.tracknyc.TrackNycApplication",
+      "projectName": "tracknyc-service",
+      "cwd": "${workspaceFolder}",
+      "args": "--spring.profiles.active=nodb",
+      "env": {
+        "TRACKNYC_MODE": "replay",
+        "TRACKNYC_FIXTURES_DIR": "${workspaceFolder}/fixtures"
+      }
+    },
+    {
+      // Needs PostGIS + Redis: run the "infra: start postgres + redis" task first.
+      "type": "java",
+      "name": "Backend: replay, with PostGIS + Redis",
+      "request": "launch",
+      "mainClass": "nyc.tracknyc.TrackNycApplication",
+      "projectName": "tracknyc-service",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "infra: start postgres + redis",
+      "env": {
+        "TRACKNYC_MODE": "replay",
+        "TRACKNYC_FIXTURES_DIR": "${workspaceFolder}/fixtures",
+        "DATABASE_URL": "jdbc:postgresql://localhost:5433/tracknyc",
+        "DATABASE_USER": "tracknyc",
+        "DATABASE_PASSWORD": "tracknyc",
+        "REDIS_URL": "redis://localhost:6380"
+      }
+    },
+    {
+      // Polls the real MTA feeds. Needs network access; MTA_API_KEY only if your
+      // account still issues one. Put it in .env, or set it here.
+      "type": "java",
+      "name": "Backend: LIVE MTA feeds",
+      "request": "launch",
+      "mainClass": "nyc.tracknyc.TrackNycApplication",
+      "projectName": "tracknyc-service",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "infra: start postgres + redis",
+      "env": {
+        "TRACKNYC_MODE": "live",
+        "MTA_API_KEY": "",
+        "DATABASE_URL": "jdbc:postgresql://localhost:5433/tracknyc",
+        "DATABASE_USER": "tracknyc",
+        "DATABASE_PASSWORD": "tracknyc",
+        "REDIS_URL": "redis://localhost:6380"
+      }
+    },
+    {
+      // Real MTA data without Docker: static GTFS is downloaded once (~5 MB) and live state
+      // is kept in memory. This is the quickest way to see every real train and station.
+      "type": "java",
+      "name": "Backend: LIVE MTA feeds (nodb)",
+      "request": "launch",
+      "mainClass": "nyc.tracknyc.TrackNycApplication",
+      "projectName": "tracknyc-service",
+      "cwd": "${workspaceFolder}",
+      "args": "--spring.profiles.active=nodb",
+      "env": {
+        "TRACKNYC_MODE": "live"
+      }
+    },
+    {
+      // Opens Chrome on the Vite dev server with breakpoints in the React code.
+      // The dev server is started for you by the preLaunchTask.
+      "type": "chrome",
+      "name": "Web: Chrome against Vite",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/web",
+      "sourceMaps": true,
+      "preLaunchTask": "web: dev server"
+    },
+    {
+      "type": "node",
+      "name": "Web: Playwright smoke test (mocked API)",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web",
+      "program": "${workspaceFolder}/web/node_modules/@playwright/test/cli.js",
+      "args": ["test", "--project=desktop"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "name": "Web: Playwright against the running backend",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web",
+      "program": "${workspaceFolder}/web/node_modules/@playwright/test/cli.js",
+      "args": ["test", "--project=desktop"],
+      "env": { "E2E_LIVE": "1" },
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      // Backend + frontend together: the full map at http://localhost:5173
+      "name": "Full stack (replay, no database)",
+      "configurations": ["Backend: replay, no database (nodb)", "Web: Chrome against Vite"],
+      "stopAll": true
+    },
+    {
+      // Same, but with every real subway line and LIRR train from the live MTA feeds.
+      "name": "Full stack (LIVE, all lines, no database)",
+      "configurations": ["Backend: LIVE MTA feeds (nodb)", "Web: Chrome against Vite"],
+      "stopAll": true
+    }
+  ]
+}

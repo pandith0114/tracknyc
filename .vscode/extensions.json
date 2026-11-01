@@ -1,0 +1,15 @@
+{
+  // VS Code offers to install these the first time the folder is opened.
+  "recommendations": [
+    "vscjava.vscode-java-pack",          // Java language support, debugger, test runner, Maven/Gradle
+    "vmware.vscode-boot-dev-pack",       // Spring Boot dashboard, properties/yaml completion, live reload
+    "vscjava.vscode-gradle",             // Gradle task explorer
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-playwright.playwright",          // run/debug the e2e tests from the sidebar
+    "ms-azuretools.vscode-docker",       // compose up/down from the Explorer
+    "ckolkman.vscode-postgres",          // browse PostGIS tables
+    "redhat.vscode-yaml",
+    "bierner.markdown-mermaid"           // renders the README architecture diagram
+  ]
+}

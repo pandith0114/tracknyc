@@ -1,0 +1,154 @@
+route_id,service_id,trip_id,trip_headsign,direction_id,shape_id
+10,SYN-Daily,SYN26LIRR_local_E_000,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_001,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_002,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_003,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_004,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_005,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_006,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_007,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_008,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_009,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_010,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_011,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_012,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_013,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_014,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_015,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_016,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_017,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_018,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_019,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_020,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_021,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_022,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_023,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_024,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_025,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_026,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_027,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_028,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_029,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_030,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_031,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_032,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_033,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_034,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_035,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_036,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_037,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_local_E_038,Babylon,0,LIRR_local_E
+10,SYN-Daily,SYN26LIRR_express_E_000,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_001,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_002,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_003,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_004,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_005,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_006,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_007,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_008,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_009,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_010,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_011,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_012,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_013,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_014,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_015,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_016,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_017,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_018,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_019,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_020,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_021,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_022,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_023,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_024,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_025,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_026,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_027,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_028,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_029,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_030,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_031,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_032,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_033,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_034,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_035,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_036,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_express_E_037,Babylon,0,LIRR_express_E
+10,SYN-Daily,SYN26LIRR_local_W_000,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_001,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_002,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_003,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_004,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_005,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_006,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_007,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_008,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_009,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_010,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_011,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_012,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_013,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_014,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_015,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_016,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_017,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_018,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_019,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_020,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_021,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_022,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_023,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_024,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_025,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_026,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_027,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_028,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_029,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_030,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_031,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_032,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_033,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_034,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_035,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_036,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_local_W_037,Penn Station,1,LIRR_local_W
+10,SYN-Daily,SYN26LIRR_express_W_000,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_001,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_002,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_003,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_004,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_005,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_006,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_007,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_008,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_009,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_010,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_011,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_012,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_013,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_014,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_015,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_016,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_017,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_018,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_019,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_020,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_021,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_022,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_023,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_024,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_025,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_026,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_027,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_028,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_029,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_030,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_031,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_032,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_033,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_034,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_035,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_036,Penn Station,1,LIRR_express_W
+10,SYN-Daily,SYN26LIRR_express_W_037,Penn Station,1,LIRR_express_W

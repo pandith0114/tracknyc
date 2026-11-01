@@ -1,0 +1,4 @@
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,route_text_color
+1,MTA NYCT,1,Broadway - 7 Avenue Local (fixture subset: South Ferry - 96 St),1,EE352E,FFFFFF
+7,MTA NYCT,7,Flushing Local,1,B933AD,FFFFFF
+L,MTA NYCT,L,14 St-Canarsie Local,1,A7A9AC,000000
